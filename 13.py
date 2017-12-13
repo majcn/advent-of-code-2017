@@ -1,59 +1,11 @@
 from PrepareData import PrepareData
-inputdata = PrepareData.getDataAsStr()
+inputdata = PrepareData.fetchData()
 
-data = [[int(x[0].replace(':', '')), int(x[1])] for x in inputdata]
+data = [d.split(': ') for d in inputdata]
+data = [map(int, d) for d in data]
+data = [[d[0], d[1], d[1] * 2 - 2] for d in data]
 
-class Layer:
+print sum(d[0] * d[1] for d in data if d[0] % d[2] == 0)
 
-    def __init__(self, r):
-        self.r = r
-        self.i = 1 if r > 0 else 0
-        self.direction = 1
-
-    def move(self):
-        if self.r < 1:
-            return
-
-        if self.i == self.r:
-            self.direction = -1
-
-        if self.i == 1:
-            self.direction = 1
-
-        self.i += self.direction
-
-    def isIOne(self):
-        return self.i == 1
-
-    def copy(self):
-        r = Layer(0)
-        r.r = self.r
-        r.i = self.i
-        r.direction = self.direction
-        return r
-
-maxLayers = data[-1][0] + 1
-layers = [Layer(next((x[1] for x in data if x[0] == i), 0)) for i in range(maxLayers)]
-
-def getCaughtGen(layers):
-    copyLayers = [l.copy() for l in layers]
-
-    for i in range(len(copyLayers)):
-        if copyLayers[i].isIOne():
-            yield [i, copyLayers[i].r]
-
-        [l.move() for l in copyLayers]
-
-
-print sum(map(lambda x: x[0] * x[1], getCaughtGen(layers)))
-
-
-delay = 0
-while True:
-    if not next(getCaughtGen(layers), None):
-        break
-
-    [l.move() for l in layers]
-    delay += 1
-
-print delay
+import itertools
+print next(i for i in itertools.count() if not any(1 for d in data if (d[0] + i) % d[2] == 0))
