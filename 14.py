@@ -38,9 +38,9 @@ for queue in full_queue:
         if r[x][y] != 1:
             continue
 
-        left =   ((x-1,y), r[x-1][y] if x > 0 else 0)
+        left =   ((x-1,y), r[x-1][y] if x > 0          else 0)
         right =  ((x+1,y), r[x+1][y] if x < (size - 1) else 0)
-        top =    ((x,y-1), r[x][y-1] if y > 0 else 0)
+        top =    ((x,y-1), r[x][y-1] if y > 0          else 0)
         bottom = ((x,y+1), r[x][y+1] if y < (size - 1) else 0)
 
         neighbours = [left, right, top, bottom]
