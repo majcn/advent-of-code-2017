@@ -30,7 +30,7 @@ for i in range(size):
 print sum(map(sum, r))
 
 
-count = 2
+group_count = 2
 full_queue = [[(x,y)] for x in range(size) for y in range(size)]
 for queue in full_queue:
     while queue:
@@ -48,9 +48,9 @@ for queue in full_queue:
         g = next((n[1] for n in neighbours if n[1] > 1), None)
 
         if not g:
-            g = count
-            count += 1
+            g = group_count
+            group_count += 1
 
         r[x][y] = g
 
-print count - 2
+print group_count - 2
