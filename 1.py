@@ -1,8 +1,8 @@
 from PrepareData import PrepareData
-inputdata = PrepareData.getDataAsStr()
+inputdata = PrepareData.fetchData()
 
 
-data = inputdata[0][0]
+data = inputdata[0]
 l_data = len(data)
 
 
