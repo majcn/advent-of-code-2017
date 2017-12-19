@@ -13,11 +13,9 @@ object Application {
     //     line indices zipWithIndex filter { (l, i) => l == line((i + line.length / 2) % line.length } map { (l, _) => l.asDigit }
     // }
 
-
     // println {
     //     line zip (line.tail + line.head) filter { case (a, b) => a == b } map { case (v, _) => v.asDigit } sum
     // }
-
 
     // val zf2 = for { i <- 0 until line.length if line(i) == line((i + line.length / 2) % line.length) } yield line(i).asDigit
     // val result2 = zf2.sum
