@@ -79,7 +79,10 @@ class Program2(Program):
             self.waitForData = True
 
     def getResult(self):
-        return (True, self.waitForData, self.send_counter)
+        if self.waitForData and self.sendTo.waitForData:
+            raise StopIteration
+
+        return self.send_counter
 
 import re
 types = [
@@ -103,10 +106,4 @@ p_1 = Program2(progs, 1)
 p_0.sendTo = p_1
 p_1.sendTo = p_0
 
-while True:
-    x_0, w_0, r_0 = p_0.next()
-    x_1, w_1, r_1 = p_1.next()
-
-    if (not x_1) or (w_0 and w_1):
-        break
-print r_1
+print [r_1 for r_0, r_1 in zip_longest(p_0, p_1)][-1]
