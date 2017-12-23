@@ -58,9 +58,11 @@ class Program2(Program):
             self.location += 1
 
             if self.location == 8:
-                self.location = 26
-                if not self.isPrime(self.reg['b']):
-                    return self.reg['b']
+                self.reg['f'] = 1 if self.isPrime(self.reg['b']) else 0
+                self.location = 24
+
+            if self.location == 26:
+                return self.reg['h']
 
     @staticmethod
     def isPrime(n):
@@ -89,7 +91,7 @@ p1 = Program(progs)
 print reduce(lambda x,y: y, p1)
 
 p2 = Program2(progs)
-print len([1 for x in p2])
+print reduce(lambda x,y: y, p2)
 
 b = 107900
 c = 124900
