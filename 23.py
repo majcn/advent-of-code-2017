@@ -50,19 +50,17 @@ class Program2(Program):
         self.reg['f'] = 1
 
     def next(self):
-        while True:
-            if self.location < 0 or self.location >= len(self.progs):
-                raise StopIteration
+        if self.location < 0 or self.location >= len(self.progs):
+            raise StopIteration
 
-            self.progs[self.location](self)
-            self.location += 1
+        self.progs[self.location](self)
+        self.location += 1
 
-            if self.location == 8:
-                self.reg['f'] = 1 if self.isPrime(self.reg['b']) else 0
-                self.location = 24
+        if self.location == 8:
+            self.reg['f'] = 1 if self.isPrime(self.reg['b']) else 0
+            self.location = 24
 
-            if self.location == 26:
-                return self.reg['h']
+        return self.reg['h']
 
     @staticmethod
     def isPrime(n):
